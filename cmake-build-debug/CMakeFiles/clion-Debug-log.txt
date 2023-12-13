@@ -1,0 +1,4 @@
+/home/roman/.local/share/JetBrains/Toolbox/apps/clion/bin/cmake/linux/x64/bin/cmake -DCMAKE_BUILD_TYPE=Debug -DCMAKE_MAKE_PROGRAM=/home/roman/.local/share/JetBrains/Toolbox/apps/clion/bin/ninja/linux/x64/ninja -DCMAKE_CXX_COMPILER=/usr/bin/c++ -G Ninja -S /home/roman/CLionProjects/MAP2023/Zlomok_skola -B /home/roman/CLionProjects/MAP2023/Zlomok_skola/cmake-build-debug
+-- Configuring done (0.0s)
+-- Generating done (0.0s)
+-- Build files have been written to: /home/roman/CLionProjects/MAP2023/Zlomok_skola/cmake-build-debug
