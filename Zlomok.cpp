@@ -34,7 +34,8 @@ void Zlomok::setMen(int other)
 
 Zlomok::Zlomok()
 {
-    std::cin>>*this;
+    //std::cin>>*this;
+    *this=Zlomok::generujZlomok();
     naZakladnyTvar();
 }
 
@@ -253,7 +254,30 @@ Zlomok *Zlomok::generujPoleZlomkov(int pocet)
 {
     auto * pole = new Zlomok[pocet]; //alokuje na hromade pamat pre pocet objektov typu zlomok
     //Zlomok *pole= (Zlomok *)malloc(pocet*sizeof(Zlomok)) //toto je zapis v C
-    return nullptr;
+    return pole;
+}
+
+void Zlomok::vypisPoleZlomkov(const Zlomok *pole, int pocet)
+{
+    for(int i=0;i<pocet;++i)
+    {
+        std::cout<<pole[i]<<" ";
+    }
+}
+
+int Zlomok::cmp(const void *p1, const void *p2)
+{
+    auto *Z1 = (Zlomok *)p1;
+    auto *Z2 = (Zlomok *)p2;
+    if((*Z1)<(*Z2))
+    {
+        return -1;
+    }
+    else if((*Z1)==(*Z2))
+    {
+        return 0;
+    }
+    return 1;
 }
 
 

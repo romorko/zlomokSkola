@@ -51,10 +51,12 @@ public:
     bool operator==(const Zlomok &other) const;
     static Zlomok generujZlomok();
     static Zlomok * generujPoleZlomkov(int pocet); //vygeneruje pole s pocet zlomkami na hromade a vrati poiner nan
+    static void vypisPoleZlomkov(const Zlomok *pole, int pocet);
+    static int cmp(const void * p1, const void *p2);
 private:
     void naZakladnyTvar();
     static int NSD(int a, int b);
-    static int generujInt(int min=-100, int max=100, bool nulaPovolena= true);
+    static int generujInt(int min=-20, int max=20, bool nulaPovolena= true);
     static int getInt(const char * text="Zadaj cele cislo:",bool nulaPovolena= true,int min=-100, int max=100);
 };
 

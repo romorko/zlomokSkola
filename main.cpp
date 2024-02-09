@@ -32,8 +32,11 @@ int main()
     std::cout<<A;
     Zlomok B;
     std::cout<<B;*/
-Zlomok *poleZlomkov = Zlomok::generujPoleZlomkov(3);
-
+Zlomok *poleZlomkov = Zlomok::generujPoleZlomkov(10);
+Zlomok::vypisPoleZlomkov(poleZlomkov,10);
+qsort(poleZlomkov,10,sizeof(Zlomok),Zlomok::cmp );
+std::cout<<std::endl;
+Zlomok::vypisPoleZlomkov(poleZlomkov,10);
 delete [] poleZlomkov;
     return 0;
 }
