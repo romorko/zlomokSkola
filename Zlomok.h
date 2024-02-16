@@ -36,7 +36,9 @@ public:
     [[nodiscard]] int getMen() const;
     void setMen(int other = 1);
     friend std::ostream &operator<<(std::ostream &os, const Zlomok &other);
+    //friend std::ofstream &operator<<(std::ofstream &os, Zlomok &other);
     friend std::istream &operator>>(std::istream &is, Zlomok &other);
+    //friend std::ifstream &operator>>(std::ifstream &is, Zlomok &other);
     Zlomok operator+(const Zlomok &other) const;
     Zlomok operator+(int other) const;
     const Zlomok &operator++();
@@ -49,14 +51,17 @@ public:
     Zlomok operator*(const Zlomok &other) const;
     bool operator<(const Zlomok &other) const;
     bool operator==(const Zlomok &other) const;
+    static int generujInt(bool nulaPovolena= true,int min=-20, int max=20);
     static Zlomok generujZlomok();
     static Zlomok * generujPoleZlomkov(int pocet); //vygeneruje pole s pocet zlomkami na hromade a vrati poiner nan
     static void vypisPoleZlomkov(const Zlomok *pole, int pocet);
+    static void zapisDoSuboru(const char* nazov, const Zlomok *pole, int kolko);
+    static void precitajZoSuboru(const char* nazov, Zlomok *pole, int kolko);
     static int cmp(const void * p1, const void *p2);
 private:
     void naZakladnyTvar();
     static int NSD(int a, int b);
-    static int generujInt(int min=-20, int max=20, bool nulaPovolena= true);
+
     static int getInt(const char * text="Zadaj cele cislo:",bool nulaPovolena= true,int min=-100, int max=100);
 };
 

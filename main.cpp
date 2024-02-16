@@ -1,5 +1,6 @@
 #include <iostream>
 #include "Zlomok.h"
+#include <fstream>
 
 int main()
 {
@@ -20,23 +21,45 @@ int main()
     int & odkazPrva = prva;  //vytvorenie odkazu
     odkazPrva=10;
     std::cout<<prva; //vypise 10*/
-//    Zlomok A {3,1};
-//    Zlomok B {2,7};
-//    std::cout<<(A<B)<<std::endl;
-//    std::cout<<(A==B)<<std::endl;
-//    std::cout<<A<<" + "<<B<<" = "<<(A+B)<<std::endl;
-//    std::cout<<A<<" - "<<B<<" = "<<(A-B)<<std::endl;
-//    std::cout<<A<<" * "<<B<<" = "<<(A*B)<<std::endl;
-//    std::cout<<A<<" : "<<B<<" = "<<(A/B)<<std::endl;
-/*    std::cin>>A;
-    std::cout<<A;
-    Zlomok B;
-    std::cout<<B;*/
-Zlomok *poleZlomkov = Zlomok::generujPoleZlomkov(10);
-Zlomok::vypisPoleZlomkov(poleZlomkov,10);
-qsort(poleZlomkov,10,sizeof(Zlomok),Zlomok::cmp );
-std::cout<<std::endl;
-Zlomok::vypisPoleZlomkov(poleZlomkov,10);
-delete [] poleZlomkov;
+    Zlomok *poleZlomkov = Zlomok::generujPoleZlomkov(10);
+    std::cout<<"Vygenerovane...";
+    Zlomok::vypisPoleZlomkov(poleZlomkov,10);
+    Zlomok::zapisDoSuboru("vstup.txt",poleZlomkov,10);
+    delete[] poleZlomkov;
+    poleZlomkov = new Zlomok[10];
+    Zlomok::precitajZoSuboru("vstup.txt",poleZlomkov,10);
+    /*std::ofstream fout;
+    fout.open("vstup.txt");
+    if (!fout.is_open())
+    {
+        std::cout << "Subor sa nepodarilo otvorit!";
+        return 1;
+    }
+
+    for (int i = 0; i < 10; ++i)
+    {
+        fout << poleZlomkov[i] << " ";
+    }
+
+    fout.close();
+     delete []poleZlomkov;
+
+    std::ifstream fin("vstup.txt");
+    if (!fin.is_open())
+    {
+        std::cout << "Subor sa nepodarilo otvorit!";
+        return 1;
+    }
+    poleZlomkov = new Zlomok[10];
+    for (int i = 0; i < 10; ++i)
+    {
+        fin >> poleZlomkov[i];
+    }
+    std::cout<<("Nacitane...");*/
+    Zlomok::vypisPoleZlomkov(poleZlomkov, 10);
+    qsort(poleZlomkov, 10, sizeof(Zlomok), Zlomok::cmp);
+    std::cout<<("Utriedene...");
+    Zlomok::vypisPoleZlomkov(poleZlomkov, 10);
+    delete[] poleZlomkov;
     return 0;
 }

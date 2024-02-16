@@ -1,5 +1,6 @@
 #include <iostream>
 #include <random>
+#include <fstream>
 #include "Zlomok.h"
 
 int Zlomok::getCit() const
@@ -126,11 +127,11 @@ bool Zlomok::operator==(const Zlomok &other) const
 
 std::ostream &operator<<(std::ostream &os, const Zlomok &other)
 {
-    if(other.men==1)
-    {
-        os<<other.cit;
-    }
-    else
+    //if(other.men==1)
+    //{
+    //    os<<other.cit;
+    //}
+    //else
     {
         os<<other.cit<<"/"<<other.men;
     }
@@ -158,8 +159,10 @@ std::istream &operator>>(std::istream &is, Zlomok &other)
 //    is>>other.cit;
 //    std::cout<<"Zadaj menovatel:";
 //    is>>other.men;
-    other.cit = Zlomok::getInt("Zadaj citatel:");
-    other.men = Zlomok::getInt("Zadaj menovatel:", false);
+//    other.cit = Zlomok::getInt("Zadaj citatel:");
+//    other.men = Zlomok::getInt("Zadaj menovatel:", false);
+    char lom;
+    is>>other.cit>>lom>>other.men;
     other.naZakladnyTvar();
     return is;
 }
@@ -189,23 +192,36 @@ int Zlomok::NSD(int a, int b)
 }
 
 
-int Zlomok::generujInt(int min, int max, bool nulaPovolena)
+int Zlomok::generujInt(bool nulaPovolena,int min, int max)
 {
-    std::random_device rd; // obtain a random number from hardware
-    std::mt19937 eng(rd()); // seed the generator
-    std::uniform_int_distribution<int> distr(min, max); // define the range
-    if(nulaPovolena)
-    {
-        return distr(eng); //generate number
-    }
     int c;
-    while((c=(distr(eng)==0)));
-    return c;
+    while(true)
+    {
+        try
+        {
+            std::random_device rd; // obtain a random number from hardware
+            std::mt19937 eng(rd()); // seed the generator
+            std::uniform_int_distribution<int> distr(min, max); // define the range
+            c = distr(eng);
+            if(!nulaPovolena && c==0)
+            {
+                throw 0;
+            }
+            return c;
+        }
+        catch (int ex)
+        {
+            continue;
+        }
+    }
 }
 
 Zlomok Zlomok::generujZlomok()
 {
-        return {generujInt(), generujInt( false)};
+    int tmp1 =  generujInt();
+    int tmp2 =  generujInt(false);
+    //std::cout<<tmp1<<" "<<tmp2<<" ";
+    return {tmp1,tmp2};
 }
 
 int Zlomok::getInt(const char * text,bool nulaPovolena, int min, int max)
@@ -253,6 +269,11 @@ int Zlomok::getInt(const char * text,bool nulaPovolena, int min, int max)
 Zlomok *Zlomok::generujPoleZlomkov(int pocet)
 {
     auto * pole = new Zlomok[pocet]; //alokuje na hromade pamat pre pocet objektov typu zlomok
+    Zlomok tmp;
+    for(int i=0;i<pocet;++i)
+    {
+        pole[i]=generujZlomok();
+    }
     //Zlomok *pole= (Zlomok *)malloc(pocet*sizeof(Zlomok)) //toto je zapis v C
     return pole;
 }
@@ -263,6 +284,7 @@ void Zlomok::vypisPoleZlomkov(const Zlomok *pole, int pocet)
     {
         std::cout<<pole[i]<<" ";
     }
+    std::cout<<std::endl;
 }
 
 int Zlomok::cmp(const void *p1, const void *p2)
@@ -279,6 +301,52 @@ int Zlomok::cmp(const void *p1, const void *p2)
     }
     return 1;
 }
+
+void Zlomok::zapisDoSuboru(const char *nazov, const Zlomok *pole, int kolko)
+{
+    std::ofstream fout;
+    fout.open(nazov);
+    if (!fout.is_open())
+    {
+        std::cout << "Subor sa nepodarilo otvorit!";
+        exit(2);
+    }
+    for (int i = 0; i < 10; ++i)
+    {
+        fout << pole[i] << " ";
+    }
+    fout.close();
+}
+
+void Zlomok::precitajZoSuboru(const char *nazov, Zlomok *pole, int kolko)
+{
+    std::ifstream fin(nazov);
+    if (!fin.is_open())
+    {
+        std::cout << "Subor sa nepodarilo otvorit!";
+        exit(3);
+    }
+
+    for (int i = 0; i < 10; ++i)
+    {
+        fin >> pole[i];
+    }
+    fin.close();
+}
+
+/*std::ifstream &operator>>(std::ifstream &is, Zlomok &other)
+{
+    char * fcit;
+    //is>>other.cit;
+    return is;
+}*/
+
+/*std::ofstream &operator<<(std::ofstream &os, Zlomok &other)
+{
+    //os<<other;
+    os<<other.cit<<"/"<<other.men;
+    return os;
+}*/
 
 
 
