@@ -21,13 +21,16 @@ int main()
     int & odkazPrva = prva;  //vytvorenie odkazu
     odkazPrva=10;
     std::cout<<prva; //vypise 10*/
-    Zlomok *poleZlomkov = Zlomok::generujPoleZlomkov(10);
-    std::cout<<"Vygenerovane...";
-    Zlomok::vypisPoleZlomkov(poleZlomkov,10);
-    Zlomok::zapisDoSuboru("vstup.txt",poleZlomkov,10);
+    int pocet;
+    std::cout<<"Zadaj pocet generovanych zlomkov:";
+    std::cin>>pocet;
+    Zlomok *poleZlomkov = Zlomok::generujPoleZlomkov(pocet);
+    std::cout<<"Vygenerovane zlomky...";
+    Zlomok::vypisPoleZlomkov(poleZlomkov,pocet);
+    Zlomok::zapisDoSuboru("vstup.txt",poleZlomkov,pocet);
     delete[] poleZlomkov;
-    poleZlomkov = new Zlomok[10];
-    Zlomok::precitajZoSuboru("vstup.txt",poleZlomkov,10);
+    poleZlomkov = new Zlomok[pocet];
+    Zlomok::precitajZoSuboru("vstup.txt",poleZlomkov,pocet);
     /*std::ofstream fout;
     fout.open("vstup.txt");
     if (!fout.is_open())
@@ -56,10 +59,10 @@ int main()
         fin >> poleZlomkov[i];
     }
     std::cout<<("Nacitane...");*/
-    Zlomok::vypisPoleZlomkov(poleZlomkov, 10);
-    qsort(poleZlomkov, 10, sizeof(Zlomok), Zlomok::cmp);
+    Zlomok::vypisPoleZlomkov(poleZlomkov, pocet);
+    qsort(poleZlomkov, pocet, sizeof(Zlomok), Zlomok::cmp);
     std::cout<<("Utriedene...");
-    Zlomok::vypisPoleZlomkov(poleZlomkov, 10);
+    Zlomok::vypisPoleZlomkov(poleZlomkov, pocet);
     delete[] poleZlomkov;
     return 0;
 }
