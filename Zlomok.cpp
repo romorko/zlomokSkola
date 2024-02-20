@@ -333,20 +333,3 @@ void Zlomok::precitajZoSuboru(const char *nazov, Zlomok *pole, int kolko)
     fin.close();
 }
 
-/*std::ifstream &operator>>(std::ifstream &is, Zlomok &other)
-{
-    char * fcit;
-    //is>>other.cit;
-    return is;
-}*/
-
-/*std::ofstream &operator<<(std::ofstream &os, Zlomok &other)
-{
-    //os<<other;
-    os<<other.cit<<"/"<<other.men;
-    return os;
-}*/
-
-
-
-

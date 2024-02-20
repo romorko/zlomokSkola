@@ -5,4 +5,5 @@ set(CMAKE_CXX_STANDARD 17)
 
 add_executable(Zlomok_skola main.cpp
         Zlomok.cpp
-        Zlomok.h)
+        Zlomok.h
+        inout.h)
