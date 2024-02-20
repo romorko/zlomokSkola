@@ -1,6 +1,6 @@
-#include <iostream>
+#include "inout.h"
 #include "Zlomok.h"
-#include <fstream>
+
 
 int main()
 {
