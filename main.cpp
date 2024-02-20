@@ -22,8 +22,7 @@ int main()
     odkazPrva=10;
     std::cout<<prva; //vypise 10*/
     int pocet;
-    std::cout<<"Zadaj pocet generovanych zlomkov:";
-    std::cin>>pocet;
+    pocet=Zlomok::getInt("Zadaj pocet prvkov pola:",false,2,100);
     Zlomok *poleZlomkov = Zlomok::generujPoleZlomkov(pocet);
     std::cout<<"Vygenerovane zlomky...";
     Zlomok::vypisPoleZlomkov(poleZlomkov,pocet);
@@ -31,34 +30,6 @@ int main()
     delete[] poleZlomkov;
     poleZlomkov = new Zlomok[pocet];
     Zlomok::precitajZoSuboru("vstup.txt",poleZlomkov,pocet);
-    /*std::ofstream fout;
-    fout.open("vstup.txt");
-    if (!fout.is_open())
-    {
-        std::cout << "Subor sa nepodarilo otvorit!";
-        return 1;
-    }
-
-    for (int i = 0; i < 10; ++i)
-    {
-        fout << poleZlomkov[i] << " ";
-    }
-
-    fout.close();
-     delete []poleZlomkov;
-
-    std::ifstream fin("vstup.txt");
-    if (!fin.is_open())
-    {
-        std::cout << "Subor sa nepodarilo otvorit!";
-        return 1;
-    }
-    poleZlomkov = new Zlomok[10];
-    for (int i = 0; i < 10; ++i)
-    {
-        fin >> poleZlomkov[i];
-    }
-    std::cout<<("Nacitane...");*/
     Zlomok::vypisPoleZlomkov(poleZlomkov, pocet);
     qsort(poleZlomkov, pocet, sizeof(Zlomok), Zlomok::cmp);
     std::cout<<("Utriedene...");

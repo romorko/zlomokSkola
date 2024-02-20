@@ -269,7 +269,6 @@ int Zlomok::getInt(const char * text,bool nulaPovolena, int min, int max)
 Zlomok *Zlomok::generujPoleZlomkov(int pocet)
 {
     auto * pole = new Zlomok[pocet]; //alokuje na hromade pamat pre pocet objektov typu zlomok
-    Zlomok tmp;
     for(int i=0;i<pocet;++i)
     {
         pole[i]=generujZlomok();
@@ -311,7 +310,7 @@ void Zlomok::zapisDoSuboru(const char *nazov, const Zlomok *pole, int kolko)
         std::cout << "Subor sa nepodarilo otvorit!";
         exit(2);
     }
-    for (int i = 0; i < 10; ++i)
+    for (int i = 0; i < kolko; ++i)
     {
         fout << pole[i] << " ";
     }
@@ -327,7 +326,7 @@ void Zlomok::precitajZoSuboru(const char *nazov, Zlomok *pole, int kolko)
         exit(3);
     }
 
-    for (int i = 0; i < 10; ++i)
+    for (int i = 0; i < kolko; ++i)
     {
         fin >> pole[i];
     }

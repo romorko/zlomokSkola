@@ -58,11 +58,12 @@ public:
     static void zapisDoSuboru(const char* nazov, const Zlomok *pole, int kolko);
     static void precitajZoSuboru(const char* nazov, Zlomok *pole, int kolko);
     static int cmp(const void * p1, const void *p2);
+    static int getInt(const char * text="Zadaj cele cislo:",bool nulaPovolena= true,int min=-100, int max=100);
 private:
     void naZakladnyTvar();
     static int NSD(int a, int b);
 
-    static int getInt(const char * text="Zadaj cele cislo:",bool nulaPovolena= true,int min=-100, int max=100);
+
 };
 
 
